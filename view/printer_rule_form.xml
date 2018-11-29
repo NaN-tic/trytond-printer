@@ -1,4 +1,7 @@
 <form>
+    <label name="sequence"/>
+    <field name="sequence"/>
+    <newline/>
     <group string="Matching" id="matching" col="2" yexpand="1" yfill="1">
         <label name="user"/>
         <field name="user"/>
