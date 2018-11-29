@@ -251,7 +251,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
     printer = fields.Many2One('printer', 'Printer', states={
             'invisible': Eval('action') == 'client',
             })
-    printer_states = fields.Many2Many('printing.rule.state', 'rule', 'state',
+    printer_states = fields.Many2Many('printer.rule.state', 'rule', 'state',
         'Printer States', states={
             'invisible': ~Eval('printer') | (Eval('action') == 'client'),
             })
@@ -339,7 +339,7 @@ class PrinterState(ModelSQL, ModelView):
 
 class RuleState(ModelSQL):
     'Rule - State'
-    __name__ = 'printing.rule.state'
+    __name__ = 'printer.rule.state'
     rule = fields.Many2One('printer.rule', 'Rule', required=True,
         ondelete='CASCADE')
     state = fields.Many2One('printer.state', 'State', required=True,
