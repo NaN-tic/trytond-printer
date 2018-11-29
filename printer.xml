@@ -25,6 +25,24 @@
             <field name="view" ref="printer_view_form"/>
             <field name="act_window" ref="act_printer_form"/>
         </record>
+
+        <record model="ir.model.access" id="access_printer">
+            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_printer_admin">
+            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="group" ref="res.group_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+
         <record model="ir.model.button" id="printer_update_info_button">
             <field name="name">update_info</field>
             <field name="string">Update State &amp; Info</field>
@@ -70,6 +88,23 @@
             <field name="view" ref="printer_rule_view_form"/>
             <field name="act_window" ref="act_printer_rule_form"/>
         </record>
+
+        <record model="ir.model.access" id="access_printer_rule">
+            <field name="model" search="[('model', '=', 'printer.rule')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_printer_rule_admin">
+            <field name="model" search="[('model', '=', 'printer.rule')]"/>
+            <field name="group" ref="res.group_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
         <menuitem parent="menu_printing" sequence="20"
             action="act_printer_rule_form" id="menu_printer_rules"/>
 
@@ -107,6 +142,21 @@
         <record model="printer.state" id="printer_state_server_error">
             <field name="name">Server Error</field>
             <field name="system_name">server-error</field>
+        </record>
+
+        <record model="ir.model.access" id="access_printer_state_rule">
+            <field name="model" search="[('model', '=', 'printer.state')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_printer_rule_state_rule">
+            <field name="model" search="[('model', '=', 'printer.rule.state')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
         </record>
 
         <record model="ir.cron" id="cron_update_printer_info">
