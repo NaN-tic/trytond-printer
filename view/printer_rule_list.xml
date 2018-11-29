@@ -1,0 +1,9 @@
+<tree>
+    <field name="user"/>
+    <field name="group"/>
+    <field name="report"/>
+    <field name="action"/>
+    <field name="client_direct_print"/>
+    <field name="printer"/>
+    <field name="printer_states_char"/>
+</tree>

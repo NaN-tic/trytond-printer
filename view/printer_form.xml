@@ -1,0 +1,23 @@
+<form col="6">
+    <label name="name"/>
+    <field name="name"/>
+    <label name="system_name"/>
+    <field name="system_name"/>
+    <label name="model"/>
+    <field name="model"/>
+    <label name="location"/>
+    <field name="location"/>
+    <label name="uri"/>
+    <field name="uri"/>
+    <label name="orientation"/>
+    <field name="orientation"/>
+    <separator colspan="6" id="state"/>
+    <label name="state"/>
+    <field name="state"/>
+    <label name="last_update"/>
+    <field name="last_update"/>
+    <group id="buttons" colspan="2">
+        <button name="update_info"/>
+        <button name="test"/>
+    </group>
+</form>

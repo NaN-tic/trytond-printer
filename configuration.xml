@@ -1,0 +1,22 @@
+<tryton>
+    <data>
+	<menuitem sequence="100" string="Printers" id="menu_printers"/>
+        <record model="ir.ui.view" id="configuration_view_form">
+            <field name="model">printer.configuration</field>
+            <field name="type">form</field>
+            <field name="name">configuration_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_configuration_form">
+            <field name="name">Configuration</field>
+            <field name="res_model">printer.configuration</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_configuration_form_view2">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="printer_view_form"/>
+            <field name="act_window" ref="act_printer_form"/>
+        </record>
+        <menuitem parent="menu_printers" sequence="1"
+            action="act_printer_form" id="menu_printer"/>
+    </data>
+</tryton>
+

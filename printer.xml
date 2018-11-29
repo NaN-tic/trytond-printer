@@ -1,0 +1,123 @@
+<tryton>
+    <data>
+	<menuitem sequence="100" name="Printing" id="menu_printing" parent="ir.menu_administration"/>
+        <record model="ir.ui.view" id="printer_view_tree">
+            <field name="model">printer</field>
+            <field name="type">tree</field>
+            <field name="name">printer_list</field>
+        </record>
+        <record model="ir.ui.view" id="printer_view_form">
+            <field name="model">printer</field>
+            <field name="type">form</field>
+            <field name="name">printer_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_printer_form">
+            <field name="name">Printers</field>
+            <field name="res_model">printer</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_printer_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="printer_view_tree"/>
+            <field name="act_window" ref="act_printer_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_printer_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="printer_view_form"/>
+            <field name="act_window" ref="act_printer_form"/>
+        </record>
+        <record model="ir.model.button" id="printer_update_info_button">
+            <field name="name">update_info</field>
+            <field name="string">Update State &amp; Info</field>
+            <field name="model" search="[('model', '=', 'printer')]"/>
+        </record>
+        <record model="ir.model.button-res.group" id="printer_update_info_button_group_admin">
+            <field name="button" ref="printer_update_info_button"/>
+            <field name="group" ref="res.group_admin"/>
+        </record>
+        <record model="ir.model.button" id="printer_test_button">
+            <field name="name">test</field>
+            <field name="string">Print Test Page</field>
+            <field name="model" search="[('model', '=', 'printer')]"/>
+        </record>
+        <record model="ir.model.button-res.group" id="printer_test_button_group_admin">
+            <field name="button" ref="printer_test_button"/>
+            <field name="group" ref="res.group_admin"/>
+        </record>
+        <menuitem parent="menu_printing" sequence="10"
+            action="act_printer_form" id="menu_printers"/>
+
+        <record model="ir.ui.view" id="printer_rule_view_tree">
+            <field name="model">printer.rule</field>
+            <field name="type">tree</field>
+            <field name="name">printer_rule_list</field>
+        </record>
+        <record model="ir.ui.view" id="printer_rule_view_form">
+            <field name="model">printer.rule</field>
+            <field name="type">form</field>
+            <field name="name">printer_rule_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_printer_rule_form">
+            <field name="name">Printer Rules</field>
+            <field name="res_model">printer.rule</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_printer_rule_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="printer_rule_view_tree"/>
+            <field name="act_window" ref="act_printer_rule_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_printer_rule_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="printer_rule_view_form"/>
+            <field name="act_window" ref="act_printer_rule_form"/>
+        </record>
+        <menuitem parent="menu_printing" sequence="20"
+            action="act_printer_rule_form" id="menu_printer_rules"/>
+
+        <record model="res.user" id="user_update_info">
+            <field name="login">user_cron_update_info</field>
+            <field name="name">Cron Update Printer Information</field>
+            <field name="signature"></field>
+            <field name="active" eval="False"/>
+        </record>
+        <record model="res.user-res.group" id="user_update_info_group_admin">
+            <field name="user" ref="user_update_info"/>
+            <field name="group" ref="res.group_admin"/>
+        </record>
+
+        <record model="printer.state" id="printer_state_unavailable">
+            <field name="name">Unavailable</field>
+            <field name="system_name">unavailable</field>
+        </record>
+        <record model="printer.state" id="printer_state_printing">
+            <field name="name">Printing</field>
+            <field name="system_name">printing</field>
+        </record>
+        <record model="printer.state" id="printer_state_unknown">
+            <field name="name">Unknown</field>
+            <field name="system_name">unknown</field>
+        </record>
+        <record model="printer.state" id="printer_state_available">
+            <field name="name">Available</field>
+            <field name="system_name">available</field>
+        </record>
+        <record model="printer.state" id="printer_state_error">
+            <field name="name">Error</field>
+            <field name="system_name">error</field>
+        </record>
+        <record model="printer.state" id="printer_state_server_error">
+            <field name="name">Server Error</field>
+            <field name="system_name">server-error</field>
+        </record>
+
+        <record model="ir.cron" id="cron_update_printer_info">
+            <field name="name">Update Printer Information</field>
+            <field name="request_user" ref="res.user_admin"/>
+            <field name="user" ref="user_update_info"/>
+            <field name="interval_number" eval="1"/>
+            <field name="interval_type">minutes</field>
+            <field name="repeat_missed" eval="False"/>
+            <field name="model">printer</field>
+            <field name="function">cron_update_info</field>
+        </record>
+    </data>
+</tryton>

@@ -1,0 +1,10 @@
+<tree>
+    <field name="name"/>
+    <field name="system_name"/>
+    <field name="state"/>
+    <field name="last_update" widget="date"/>
+    <field name="last_update" widget="time"/>
+    <field name="model"/>
+    <field name="location"/>
+    <button name="test" tree_invisible="1"/>
+</tree>
