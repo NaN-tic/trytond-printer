@@ -1,0 +1,342 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:printer.rule:"
+msgid "Invalid IP Address or Network \"%(ip)s\" on rule \"%(rule)s\"."
+msgstr "L'adreça o xarxa IP \"%(ip)s\" de la regla \"%(rule)s\" no és vàlida."
+
+msgctxt "error:printer:"
+msgid ""
+"Could not send report to print server as there's no printer configured."
+msgstr ""
+"No s'ha pogut enviar l'informe al servidor d'impressió perquè no hi ha cap "
+"impressora configurada."
+
+msgctxt "field:printer,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:printer,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:printer,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:printer,last_update:"
+msgid "Last Update"
+msgstr "Última actualització"
+
+msgctxt "field:printer,location:"
+msgid "Location"
+msgstr "Ubicació"
+
+msgctxt "field:printer,model:"
+msgid "Model"
+msgstr "Model"
+
+msgctxt "field:printer,name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:printer,orientation:"
+msgid "Orientation"
+msgstr "Orientació"
+
+msgctxt "field:printer,rec_name:"
+msgid "Record Name"
+msgstr "Nom del registre"
+
+msgctxt "field:printer,state:"
+msgid "State"
+msgstr "Estat"
+
+msgctxt "field:printer,system_name:"
+msgid "System Name"
+msgstr "Nom del sistema"
+
+msgctxt "field:printer,uri:"
+msgid "URI"
+msgstr "URI"
+
+msgctxt "field:printer,write_date:"
+msgid "Write Date"
+msgstr "Data de modificació"
+
+msgctxt "field:printer,write_uid:"
+msgid "Write User"
+msgstr "Usuari de modificació"
+
+msgctxt "field:printer.rule,action:"
+msgid "Action"
+msgstr "Acció"
+
+msgctxt "field:printer.rule,client_direct_print:"
+msgid "Client Direct Print"
+msgstr "Impressió directe del client"
+
+msgctxt "field:printer.rule,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:printer.rule,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:printer.rule,group:"
+msgid "Group"
+msgstr "Grup"
+
+msgctxt "field:printer.rule,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:printer.rule,ip_address:"
+msgid "IP Address or Network"
+msgstr "Adreça o xarxa IP"
+
+msgctxt "field:printer.rule,printer:"
+msgid "Printer"
+msgstr "Impressora"
+
+msgctxt "field:printer.rule,printer_states:"
+msgid "Printer States"
+msgstr "Estats d'impressora"
+
+msgctxt "field:printer.rule,printer_states_char:"
+msgid "Printer States"
+msgstr "Estats d'impressora"
+
+msgctxt "field:printer.rule,rec_name:"
+msgid "Record Name"
+msgstr "Nom del registre"
+
+msgctxt "field:printer.rule,report:"
+msgid "Report"
+msgstr "Informe"
+
+msgctxt "field:printer.rule,sequence:"
+msgid "Sequence"
+msgstr "Seqüència"
+
+msgctxt "field:printer.rule,user:"
+msgid "User"
+msgstr "Usuari"
+
+msgctxt "field:printer.rule,write_date:"
+msgid "Write Date"
+msgstr "Data de modificació"
+
+msgctxt "field:printer.rule,write_uid:"
+msgid "Write User"
+msgstr "Usuari de modificació"
+
+msgctxt "field:printer.rule.state,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:printer.rule.state,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:printer.rule.state,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:printer.rule.state,rec_name:"
+msgid "Record Name"
+msgstr "Nom del registre"
+
+msgctxt "field:printer.rule.state,rule:"
+msgid "Rule"
+msgstr "Regla"
+
+msgctxt "field:printer.rule.state,state:"
+msgid "State"
+msgstr "Estat"
+
+msgctxt "field:printer.rule.state,write_date:"
+msgid "Write Date"
+msgstr "Data de modificació"
+
+msgctxt "field:printer.rule.state,write_uid:"
+msgid "Write User"
+msgstr "Usuari de modificació"
+
+msgctxt "field:printer.state,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:printer.state,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:printer.state,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:printer.state,name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:printer.state,rec_name:"
+msgid "Record Name"
+msgstr "Nom del registre"
+
+msgctxt "field:printer.state,system_name:"
+msgid "System Name"
+msgstr "Nom del sistema"
+
+msgctxt "field:printer.state,write_date:"
+msgid "Write Date"
+msgstr "Data de modificació"
+
+msgctxt "field:printer.state,write_uid:"
+msgid "Write User"
+msgstr "Usuari de modificació"
+
+msgctxt "help:printer.rule,ip_address:"
+msgid ""
+"IPv4 or IPv6 IP address or network. Valid values include: 192.168.0.26 or "
+"192.168.0.0/24"
+msgstr ""
+"Adreça o xarxa IPv4 o IPv6. Valors vàlids d'exemple: 192.168.0.26 or "
+"192.168.0.0/24"
+
+msgctxt "model:ir.action,name:act_printer_form"
+msgid "Printers"
+msgstr "Impressores"
+
+msgctxt "model:ir.action,name:act_printer_rule_form"
+msgid "Printer Rules"
+msgstr "Regles d'impressió"
+
+msgctxt "model:ir.cron,name:cron_update_printer_info"
+msgid "Update Printer Information"
+msgstr "Actualitza informació d'impressores "
+
+msgctxt "model:ir.model.button,string:printer_test_button"
+msgid "Print Test Page"
+msgstr "Imprimeix pàgina de prova"
+
+msgctxt "model:ir.model.button,string:printer_update_info_button"
+msgid "Update State & Info"
+msgstr "Actualitza informació i estat"
+
+msgctxt "model:ir.ui.menu,name:menu_printer_rules"
+msgid "Printer Rules"
+msgstr "Regles d'impressió"
+
+msgctxt "model:ir.ui.menu,name:menu_printers"
+msgid "Printers"
+msgstr "Impressores"
+
+msgctxt "model:ir.ui.menu,name:menu_printing"
+msgid "Printing"
+msgstr "Impressió"
+
+msgctxt "model:printer,name:"
+msgid "Printer"
+msgstr "Impressora"
+
+msgctxt "model:printer.rule,name:"
+msgid "Printer Rule"
+msgstr "Regla d'impressió"
+
+msgctxt "model:printer.rule.state,name:"
+msgid "Rule - State"
+msgstr "Regla - Estat"
+
+msgctxt "model:printer.state,name:"
+msgid "Printer State"
+msgstr "Estat d'impressora"
+
+msgctxt "model:printer.state,name:printer_state_available"
+msgid "Available"
+msgstr "Disponible"
+
+msgctxt "model:printer.state,name:printer_state_error"
+msgid "Error"
+msgstr "Error"
+
+msgctxt "model:printer.state,name:printer_state_printing"
+msgid "Printing"
+msgstr "Imprimint"
+
+msgctxt "model:printer.state,name:printer_state_server_error"
+msgid "Server Error"
+msgstr "Error del servidor"
+
+msgctxt "model:printer.state,name:printer_state_unavailable"
+msgid "Unavailable"
+msgstr "No disponible"
+
+msgctxt "model:printer.state,name:printer_state_unknown"
+msgid "Unknown"
+msgstr "Desconegut"
+
+msgctxt "selection:printer,orientation:"
+msgid "No rotation"
+msgstr "Sense rotació"
+
+msgctxt "selection:printer,orientation:"
+msgid "Rotate 180 degrees"
+msgstr "Rota 180 graus"
+
+msgctxt "selection:printer,orientation:"
+msgid "Rotate 270 degrees"
+msgstr "Rota 270 graus"
+
+msgctxt "selection:printer,orientation:"
+msgid "Rotate 90 degrees"
+msgstr "Rota 90 graus"
+
+msgctxt "selection:printer,state:"
+msgid "Available"
+msgstr "Disponible"
+
+msgctxt "selection:printer,state:"
+msgid "Error"
+msgstr "Error"
+
+msgctxt "selection:printer,state:"
+msgid "Printing"
+msgstr "Imprimint"
+
+msgctxt "selection:printer,state:"
+msgid "Server Error"
+msgstr "Error del servidor"
+
+msgctxt "selection:printer,state:"
+msgid "Unavailable"
+msgstr "No disponible"
+
+msgctxt "selection:printer,state:"
+msgid "Unknown"
+msgstr "Desconegut"
+
+msgctxt "selection:printer.rule,action:"
+msgid ""
+msgstr ""
+
+msgctxt "selection:printer.rule,action:"
+msgid "Drop"
+msgstr "Llençar"
+
+msgctxt "selection:printer.rule,action:"
+msgid "Send to Client"
+msgstr "Enviar al client"
+
+msgctxt "selection:printer.rule,action:"
+msgid "Send to Printer"
+msgstr "Enviar a impressora"
+
+msgctxt "view:printer.rule:"
+msgid "Action"
+msgstr "Acció"
+
+msgctxt "view:printer.rule:"
+msgid "Matching"
+msgstr "Paràmetres de coincidència"
