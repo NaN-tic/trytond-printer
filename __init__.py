@@ -10,4 +10,5 @@ def register():
         printer.PrinterRule,
         printer.PrinterState,
         printer.RuleState,
+        printer.Cron,
         module='printer', type_='model')

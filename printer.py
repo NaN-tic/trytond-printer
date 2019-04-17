@@ -7,10 +7,12 @@ from datetime import datetime
 from trytond.model import (sequence_ordered, ModelSQL, ModelView, MatchMixin,
     fields)
 from trytond.pyson import Eval
-from trytond.pool import Pool
+from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
-__all__ = ['Printer', 'PrinterRule', 'PrinterState', 'RuleState']
+__all__ = ['Printer', 'PrinterRule', 'PrinterState', 'RuleState', 'Cron']
 
 PRINTER_STATES = [
     ('unavailable', 'Unavailable'),
@@ -27,6 +29,14 @@ STATE_MAPPING = {
     5 : 'error'
     }
 
+class Cron(metaclass=PoolMeta):
+    __name__ = 'ir.cron'
+
+    @classmethod
+    def __setup__(cls):
+        super(Cron, cls).__setup__()
+        cls.method.selection.extend(
+            [('printer|cron_update_info','Update Printer Information')])
 
 class Printer(ModelSQL, ModelView):
     'Printer'
@@ -64,10 +74,6 @@ class Printer(ModelSQL, ModelView):
                 'test': {
                     'icon': 'tryton-print',
                     }
-                })
-        cls._error_messages.update({
-                'no_printer': ("Could not send report to print server as "
-                    "there's no printer configured."),
                 })
 
     def get_rec_name(self, name):
@@ -187,7 +193,7 @@ class Printer(ModelSQL, ModelView):
 
         elif action == 'server':
             if not printer:
-                cls.raise_user_error('no_printer')
+                raise UserError(gettext('printer.no_printer'))
 
             printer.print_data(data, name)
 
@@ -262,14 +268,6 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
         'get_printer_states_char')
 
     @classmethod
-    def __setup__(cls):
-        super(PrinterRule, cls).__setup__()
-        cls._error_messages.update({
-                'invalid_ip_address': ('Invalid IP Address or Network "%(ip)s" '
-                    'on rule "%(rule)s".'),
-                })
-
-    @classmethod
     def validate(cls, rules):
         for rule in rules:
             rule.check_ip()
@@ -283,10 +281,9 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             else:
                 ipaddress.ip_address(self.ip_address)
         except ValueError:
-            self.raise_user_error('invalid_ip_address', {
-                    'ip': self.ip_address,
-                    'rule': self.rec_name,
-                    })
+            raise UserError(gettext('printer.invalid_ip_address',
+                    ip=self.ip_address,
+                    rule=self.rec_name))
 
     def get_ip_network(self):
         if not self.ip_address:

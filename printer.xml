@@ -160,14 +160,9 @@
         </record>
 
         <record model="ir.cron" id="cron_update_printer_info">
-            <field name="name">Update Printer Information</field>
-            <field name="request_user" ref="res.user_admin"/>
-            <field name="user" ref="user_update_info"/>
             <field name="interval_number" eval="1"/>
             <field name="interval_type">minutes</field>
-            <field name="repeat_missed" eval="False"/>
-            <field name="model">printer</field>
-            <field name="function">cron_update_info</field>
+            <field name="method">printer|cron_update_info</field>
         </record>
     </data>
 </tryton>
