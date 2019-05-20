@@ -1,6 +1,6 @@
 <tryton>
     <data>
-	<menuitem sequence="100" name="Printing" id="menu_printing" parent="ir.menu_administration"/>
+        <menuitem sequence="100" name="Printing" id="menu_printing" parent="ir.menu_administration"/>
         <record model="ir.ui.view" id="printer_view_tree">
             <field name="model">printer</field>
             <field name="type">tree</field>
