@@ -15,8 +15,8 @@ from trytond.protocols.wrappers import with_pool, with_transaction
 
 logger = logging.getLogger(__name__)
 
-QZ_TRY_PRIVATE_KEY = config.get('printer', 'qz-private-key')
-QZ_TRY_PRIVATE_KEY_PASS = config.get('printer', 'qz-private-key-pass',
+PRIVATE_KEY = config.get('printer', 'private_key')
+PRIVATE_KEY_PASS = config.get('printer', 'private_key_pass',
     default=None)
 
 
@@ -28,15 +28,15 @@ def sign_message(request, pool):
     data = json.loads(request_body)
     message = data.get('request', None)
 
-    if not message or not QZ_TRY_PRIVATE_KEY:
+    if not message or not PRIVATE_KEY:
         logger.info("No Private Key deffined or in the request is "
             "missing the message")
         abort(403)
 
-    mypass = (QZ_TRY_PRIVATE_KEY_PASS.encode('utf-8')
-        if QZ_TRY_PRIVATE_KEY_PASS else None)
+    mypass = (PRIVATE_KEY_PASS.encode('utf-8')
+        if PRIVATE_KEY_PASS else None)
     # Load signature
-    key = serialization.load_pem_private_key(QZ_TRY_PRIVATE_KEY.encode(
+    key = serialization.load_pem_private_key(PRIVATE_KEY.encode(
             'utf-8'), mypass, backend=default_backend())
     # Create the signature
     signature = key.sign(message.encode('utf-8'), padding.PKCS1v15(),
