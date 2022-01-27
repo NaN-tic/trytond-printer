@@ -21,5 +21,7 @@
         <field name="client_direct_print"/>
         <label name="printer"/>
         <field name="printer"/>
+        <label name="client_printer"/>
+        <field name="client_printer"/>
     </group>
 </form>
