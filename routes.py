@@ -6,7 +6,6 @@ import json
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
-from werkzeug.exceptions import abort
 from werkzeug.wrappers import Response
 
 from trytond.config import config
@@ -31,7 +30,7 @@ def sign_message(request, pool):
     if not message or not PRIVATE_KEY:
         logger.info("No Private Key deffined or in the request is "
             "missing the message")
-        abort(403)
+        return Response('', 200, content_type="text/plain")
 
     mypass = (PRIVATE_KEY_PASS.encode('utf-8')
         if PRIVATE_KEY_PASS else None)
