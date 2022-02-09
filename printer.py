@@ -24,10 +24,11 @@ PRINTER_STATES = [
     ]
 
 STATE_MAPPING = {
-    3 : 'available',
-    4 : 'printing',
-    5 : 'error'
+    3: 'available',
+    4: 'printing',
+    5: 'error'
     }
+
 
 class Cron(metaclass=PoolMeta):
     __name__ = 'ir.cron'
@@ -36,11 +37,13 @@ class Cron(metaclass=PoolMeta):
     def __setup__(cls):
         super(Cron, cls).__setup__()
         cls.method.selection.extend(
-            [('printer|cron_update_info','Update Printer Information')])
+            [('printer|cron_update_info', 'Update Printer Information')])
+
 
 class Printer(ModelSQL, ModelView):
     'Printer'
     __name__ = 'printer'
+
     name = fields.Char('Name', required=True)
     system_name = fields.Char('System Name', required=True, readonly=True)
     state = fields.Function(fields.Selection(PRINTER_STATES, 'State'),
@@ -53,7 +56,7 @@ class Printer(ModelSQL, ModelView):
             ('90', 'Rotate 90 degrees'),
             ('180', 'Rotate 180 degrees'),
             ('270', 'Rotate 270 degrees'),
-            ] , 'Orientation', required=True, sort=False)
+            ], 'Orientation', required=True, sort=False)
     last_update = fields.DateTime('Last Update', required=True, readonly=True)
 
     @staticmethod
@@ -128,7 +131,6 @@ class Printer(ModelSQL, ModelView):
         except:
             server_error = True
 
-
         to_save = []
         for printer in cls.search([]):
             if printer.system_name in cups_printers:
@@ -173,6 +175,7 @@ class Printer(ModelSQL, ModelView):
         action = None
         client_direct_print = report.direct_print if report else False
         printer = None
+        client_printer = None
         for rule in Rule.search([]):
             if rule.match(pattern):
                 if rule.action and not action:
@@ -180,21 +183,22 @@ class Printer(ModelSQL, ModelView):
                     client_direct_print = rule.client_direct_print
                 if rule.printer and not printer:
                     printer = rule.printer
+                if rule.client_printer and not client_printer:
+                    client_printer = rule.client_printer
                 if action:
-                    if action != 'server':
+                    if action == 'drop':
                         break
-                    elif printer:
+                    elif action == 'server' and printer:
+                        break
+                    elif action == 'client' and client_printer:
                         break
         if not action or action == 'client':
-            return type, data, client_direct_print, name
-
+            return type, data, client_direct_print, client_printer or name
         elif action == 'drop':
             return
-
         elif action == 'server':
             if not printer:
                 raise UserError(gettext('printer.no_printer'))
-
             printer.print_data(data, name)
 
     def print_data(self, data, name):
@@ -238,10 +242,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
 
     user = fields.Many2One('res.user', 'User')
     group = fields.Many2One('res.group', 'Group')
-    report = fields.Many2One('ir.action.report', 'Report', domain=[
-            ('template_extension', '=', 'jrxml'),
-            ('extension', '=', 'pdf'),
-            ])
+    report = fields.Many2One('ir.action.report', 'Report')
     ip_address = fields.Char('IP Address or Network', help='IPv4 or IPv6 IP '
         'address or network. Valid values include: 192.168.0.26 or '
         '192.168.0.0/24')
@@ -256,6 +257,9 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             })
     printer = fields.Many2One('printer', 'Printer', states={
             'invisible': Eval('action') == 'client',
+            })
+    client_printer = fields.Char('Client Printer', states={
+            'invisible': Eval('action') != 'client',
             })
     printer_states = fields.Many2Many('printer.rule.state', 'rule', 'state',
         'Printer States', states={
@@ -294,7 +298,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
     def get_ip_address(self):
         if not self.ip_address:
             return
-        if not '/' in self.ip_address:
+        if '/' not in self.ip_address:
             return ipaddress.ip_address(self.ip_address)
 
     def match(self, pattern):
@@ -306,7 +310,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
         if 'ip_address' in pattern:
             ip_address = ipaddress.ip_address(pattern['ip_address'])
             if (self.get_ip_network()
-                    and not ip_address in self.get_ip_network()):
+                    and ip_address not in self.get_ip_network()):
                 return False
             if (self.get_ip_address() and ip_address != self.get_ip_address()):
                 return False
@@ -325,6 +329,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
 class PrinterState(ModelSQL, ModelView):
     'Printer State'
     __name__ = 'printer.state'
+
     name = fields.Char('Name', required=True, translate=True)
     system_name = fields.Char('System Name', required=True)
 
@@ -337,6 +342,7 @@ class PrinterState(ModelSQL, ModelView):
 class RuleState(ModelSQL):
     'Rule - State'
     __name__ = 'printer.rule.state'
+
     rule = fields.Many2One('printer.rule', 'Rule', required=True,
         ondelete='CASCADE')
     state = fields.Many2One('printer.state', 'State', required=True,
