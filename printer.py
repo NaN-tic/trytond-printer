@@ -11,8 +11,11 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
+from trytond.config import config
 
 __all__ = ['Printer', 'PrinterRule', 'PrinterState', 'RuleState', 'Cron']
+
+CUPS_SERVER = config.get('printer', 'server', default='localhost')
 
 PRINTER_STATES = [
     ('unavailable', 'Unavailable'),
@@ -112,6 +115,7 @@ class Printer(ModelSQL, ModelView):
 
     @staticmethod
     def cups_connection():
+        cups.setServer(CUPS_SERVER)
         return cups.Connection()
 
     @classmethod
