@@ -271,7 +271,7 @@ msgstr "Error del servidor"
 
 msgctxt "model:printer.state,name:printer_state_unavailable"
 msgid "Unavailable"
-msgstr "Nno disponible"
+msgstr "No disponible"
 
 msgctxt "model:printer.state,name:printer_state_unknown"
 msgid "Unknown"
