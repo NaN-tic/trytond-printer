@@ -320,7 +320,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             if (self.printer.state and self.printer.state not in [
                         x.system_name for x in self.printer_states]):
                 return False
-        return True
+        return res
 
     def get_printer_states_char(self, name):
         return ', '.join([x.name for x in self.printer_states])
