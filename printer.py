@@ -308,7 +308,8 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             if self.group and self.group.id not in groups:
                 return False
         if 'ip_address' in pattern:
-            ip_address = ipaddress.ip_address(pattern['ip_address'])
+            pattern = pattern.copy()
+            ip_address = ipaddress.ip_address(pattern.pop('ip_address'))
             if (self.get_ip_network()
                     and ip_address not in self.get_ip_network()):
                 return False
