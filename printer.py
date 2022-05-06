@@ -163,6 +163,11 @@ class Printer(ModelSQL, ModelView):
         Rule = pool.get('printer.rule')
         User = pool.get('res.user')
 
+        context = Transaction().context
+
+        if context.get('ignore_printer_rules'):
+            return type, data, report.direct_print, name
+
         pattern = {}
         user_id = Transaction().user
         if user_id:
@@ -171,7 +176,6 @@ class Printer(ModelSQL, ModelView):
             pattern['groups'] = [x.id for x in user.groups]
         if report:
             pattern['report'] = report.id
-        context = Transaction().context
         remote_addr = context.get('_request', {}).get('remote_addr')
         if remote_addr:
             pattern['ip_address'] = ipaddress.ip_address(remote_addr)
