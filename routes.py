@@ -26,7 +26,11 @@ def sign_message(request, pool):
     request_body = request.get_data(as_text=True)
     data = json.loads(request_body)
     message = data.get('request', None)
+    res = get_signed_message(message)
+    return res
 
+
+def get_signed_message(message):
     if not message or not PRIVATE_KEY:
         logger.info("No Private Key deffined or in the request is "
             "missing the message")
