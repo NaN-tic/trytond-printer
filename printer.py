@@ -136,15 +136,8 @@ class Printer(ModelSQL, ModelView):
 
         to_save = []
         for printer in cls.search([]):
-            if printer.system_name in cups_printers:
-                if cups_printers:
-                    info = cups_printers.pop(printer.system_name)
-                else:
-                    info = {
-                        'printer-make-and-model': 'Unknown',
-                        'printer-location': 'Unknown',
-                        'printer-uri-supported': 'Unknown',
-                        }
+            if cups_printers and printer.system_name in cups_printers:
+                info = cups_printers.pop(printer.system_name)
                 printer.last_update = datetime.now()
                 printer.model = info.get('printer-make-and-model')
                 printer.location = info.get('printer-location')
