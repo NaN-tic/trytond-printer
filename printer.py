@@ -131,20 +131,26 @@ class Printer(ModelSQL, ModelView):
         try:
             connection = cls.cups_connection()
             cups_printers = connection.getPrinters()
-            server_error = False
         except:
-            server_error = True
+            cups_printers = None
 
         to_save = []
         for printer in cls.search([]):
             if printer.system_name in cups_printers:
-                info = cups_printers.pop(printer.system_name)
+                if cups_printers:
+                    info = cups_printers.pop(printer.system_name)
+                else:
+                    info = {
+                        'printer-make-and-model': 'Unknown',
+                        'printer-location': 'Unknown',
+                        'printer-uri-supported': 'Unknown',
+                        }
                 printer.last_update = datetime.now()
                 printer.model = info.get('printer-make-and-model')
                 printer.location = info.get('printer-location')
                 printer.uri = info.get('printer-uri-supported')
             to_save.append(printer)
-        if not printers and not server_error:
+        if not printers and cups_printers:
             for system_name, info in cups_printers.items():
                 printer = cls()
                 printer.name = system_name
