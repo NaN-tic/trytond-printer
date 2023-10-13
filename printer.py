@@ -13,7 +13,6 @@ from trytond.i18n import gettext
 from trytond.exceptions import UserError
 from trytond.config import config
 
-__all__ = ['Printer', 'PrinterRule', 'PrinterState', 'RuleState', 'Cron']
 
 CUPS_SERVER = config.get('printer', 'server', default='localhost')
 
