@@ -189,6 +189,12 @@ class Printer(ModelSQL, ModelView):
                     client_direct_print = rule.client_direct_print
                 if rule.printer and not printer:
                     printer = rule.printer
+                if rule.context_key and not printer:
+                    printer_name = context.get(rule.context_key)
+                    printers = cls.search([('name', '=', printer_name)], limit=1)
+                    if printers:
+                        printer = printers[0]
+                        print(printer)
                 if rule.client_printer and not client_printer:
                     client_printer = rule.client_printer
                 if action:
@@ -198,11 +204,13 @@ class Printer(ModelSQL, ModelView):
                         break
                     elif action == 'client' and client_printer:
                         break
+                    elif action == 'context' and printer:
+                        break
         if not action or action == 'client':
             return type, data, client_direct_print, client_printer or name
         elif action == 'drop':
             return
-        elif action == 'server':
+        elif action == 'server' or action == 'context':
             if not printer:
                 raise UserError(gettext('printer.no_printer'))
             printer.print_data(data, name)
@@ -257,12 +265,13 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             ('drop', 'Drop'),
             ('server', 'Send to Printer'),
             ('client', 'Send to Client'),
+            ('context', 'Use Context'),
             ], 'Action')
     client_direct_print = fields.Boolean('Client Direct Print', states={
             'invisible': Eval('action') != 'client',
             })
     printer = fields.Many2One('printer', 'Printer', states={
-            'invisible': Eval('action') == 'client',
+            'invisible': Eval('action') != 'server',
             })
     client_printer = fields.Char('Client Printer', states={
             'invisible': Eval('action') != 'client',
@@ -276,6 +285,9 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
                 'invisible': ~Eval('printer') | (Eval('action') == 'client'),
                 }),
         'get_printer_states_char')
+    context_key = fields.Char('Context Key', states={
+            'invisible': Eval('action') != 'context',
+            })
 
     @classmethod
     def validate(cls, rules):
