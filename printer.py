@@ -194,7 +194,6 @@ class Printer(ModelSQL, ModelView):
                     printers = cls.search([('name', '=', printer_name)], limit=1)
                     if printers:
                         printer = printers[0]
-                        print(printer)
                 if rule.client_printer and not client_printer:
                     client_printer = rule.client_printer
                 if action:
