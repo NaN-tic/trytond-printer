@@ -4,6 +4,7 @@
 from trytond.pool import Pool
 from . import printer
 from . import routes
+from . import user
 
 __all__ = ['register', 'routes']
 
@@ -15,4 +16,5 @@ def register():
         printer.PrinterState,
         printer.RuleState,
         printer.Cron,
+        user.User,
         module='printer', type_='model')
