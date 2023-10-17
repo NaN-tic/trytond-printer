@@ -94,6 +94,10 @@ msgctxt "field:printer.state,system_name:"
 msgid "System Name"
 msgstr "Nom del sistema"
 
+msgctxt "field:res.user,ignore_printer_rules:"
+msgid "Ignore Printer Rules"
+msgstr "Ignorar regles d'impresió"
+
 msgctxt "help:printer.rule,ip_address:"
 msgid ""
 "IPv4 or IPv6 IP address or network. Valid values include: 192.168.0.26 or "
@@ -181,7 +185,7 @@ msgstr "Desconegut"
 
 msgctxt "selection:ir.cron,method:"
 msgid "Update Printer Information"
-msgstr ""
+msgstr "Acutalitzar Informació d'impressores"
 
 msgctxt "selection:printer,orientation:"
 msgid "No rotation"
