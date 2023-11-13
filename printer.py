@@ -220,7 +220,7 @@ class Printer(ModelSQL, ModelView):
         try:
             os.close(fd)
             with open(filename, 'wb') as f:
-                f.write(data)
+                f.write(data.encode() if isinstance(data, str) else data)
             self.print_file(filename, name)
         finally:
             os.unlink(filename)
