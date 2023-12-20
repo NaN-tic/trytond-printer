@@ -185,7 +185,7 @@ msgstr "Desconegut"
 
 msgctxt "selection:ir.cron,method:"
 msgid "Update Printer Information"
-msgstr "Acutalitzar Informació d'impressores"
+msgstr "Actualitzar informació d'impressores"
 
 msgctxt "selection:printer,orientation:"
 msgid "No rotation"
