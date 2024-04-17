@@ -27,14 +27,14 @@
         </record>
 
         <record model="ir.model.access" id="access_printer">
-            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="model">printer</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
         <record model="ir.model.access" id="access_printer_admin">
-            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="model">printer</field>
             <field name="group" ref="res.group_admin"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -46,7 +46,7 @@
         <record model="ir.model.button" id="printer_update_info_button">
             <field name="name">update_info</field>
             <field name="string">Update State &amp; Info</field>
-            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="model">printer</field>
         </record>
         <record model="ir.model.button-res.group" id="printer_update_info_button_group_admin">
             <field name="button" ref="printer_update_info_button"/>
@@ -55,7 +55,7 @@
         <record model="ir.model.button" id="printer_test_button">
             <field name="name">test</field>
             <field name="string">Print Test Page</field>
-            <field name="model" search="[('model', '=', 'printer')]"/>
+            <field name="model">printer</field>
         </record>
         <record model="ir.model.button-res.group" id="printer_test_button_group_admin">
             <field name="button" ref="printer_test_button"/>
@@ -90,14 +90,14 @@
         </record>
 
         <record model="ir.model.access" id="access_printer_rule">
-            <field name="model" search="[('model', '=', 'printer.rule')]"/>
+            <field name="model">printer.rule</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
         <record model="ir.model.access" id="access_printer_rule_admin">
-            <field name="model" search="[('model', '=', 'printer.rule')]"/>
+            <field name="model">printer.rule</field>
             <field name="group" ref="res.group_admin"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -145,14 +145,14 @@
         </record>
 
         <record model="ir.model.access" id="access_printer_state_rule">
-            <field name="model" search="[('model', '=', 'printer.state')]"/>
+            <field name="model">printer.state</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
         <record model="ir.model.access" id="access_printer_rule_state_rule">
-            <field name="model" search="[('model', '=', 'printer.rule.state')]"/>
+            <field name="model">printer.rule.state</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
