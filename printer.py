@@ -4,6 +4,7 @@ import tempfile
 import ipaddress
 import subprocess
 from datetime import datetime
+from cups import IPPError
 from trytond.model import (sequence_ordered, ModelSQL, ModelView, MatchMixin,
     fields)
 from trytond.pyson import Eval
@@ -214,7 +215,10 @@ class Printer(ModelSQL, ModelView):
         elif action == 'server' or action == 'context':
             if not printer:
                 raise UserError(gettext('printer.no_printer'))
-            printer.print_data(data, name)
+            try:
+                printer.print_data(data, name)
+            except IPPError as e:
+                raise UserError(gettext('printer.msg_error_printer', error=str(e)))
 
     def print_data(self, data, name):
         fd, filename = tempfile.mkstemp()
