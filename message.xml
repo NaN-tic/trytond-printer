@@ -9,5 +9,9 @@ this repository contains the full copyright notices and license terms. -->
     <record model="ir.message" id="invalid_ip_address">
         <field name="text">Invalid IP Address or Network "%(ip)s" on rule "%(rule)s"</field>
     </record>
+    <record model="ir.message" id="msg_error_printer">
+        <field name="text">Error printer:
+%(error)s</field>
+    </record>
     </data>
 </tryton>
