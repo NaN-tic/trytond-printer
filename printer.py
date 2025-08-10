@@ -121,6 +121,8 @@ class Printer(ModelSQL, ModelView):
     @classmethod
     @ModelView.button
     def test(cls, printers):
+        if not printers:
+            return
         connection = cls.cups_connection()
         for printer in printers:
             connection.printTestPage(printer.system_name)
@@ -128,6 +130,8 @@ class Printer(ModelSQL, ModelView):
     @classmethod
     @ModelView.button
     def update_info(cls, printers):
+        if not printers:
+            return
         try:
             connection = cls.cups_connection()
             cups_printers = connection.getPrinters()
