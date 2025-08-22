@@ -121,6 +121,8 @@ class Printer(ModelSQL, ModelView):
     @classmethod
     @ModelView.button
     def test(cls, printers):
+        if not printers:
+            return
         connection = cls.cups_connection()
         for printer in printers:
             connection.printTestPage(printer.system_name)
@@ -135,7 +137,10 @@ class Printer(ModelSQL, ModelView):
             cups_printers = None
 
         to_save = []
-        for printer in cls.search([]):
+        tryton_printers = cls.search([])
+        tryton_printers_names = [x.system_name for x in tryton_printers]
+        printers_to_check = printers if printers else tryton_printers
+        for printer in printers_to_check:
             if cups_printers and printer.system_name in cups_printers:
                 info = cups_printers.pop(printer.system_name)
                 printer.last_update = datetime.now()
@@ -145,6 +150,8 @@ class Printer(ModelSQL, ModelView):
             to_save.append(printer)
         if not printers and cups_printers:
             for system_name, info in cups_printers.items():
+                if system_name in tryton_printers_names:
+                    continue
                 printer = cls()
                 printer.name = system_name
                 printer.system_name = system_name
