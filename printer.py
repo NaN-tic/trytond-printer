@@ -130,8 +130,6 @@ class Printer(ModelSQL, ModelView):
     @classmethod
     @ModelView.button
     def update_info(cls, printers):
-        if not printers:
-            return
         try:
             connection = cls.cups_connection()
             cups_printers = connection.getPrinters()
