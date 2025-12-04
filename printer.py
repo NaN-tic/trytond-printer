@@ -12,6 +12,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
+from trytond.model.exceptions import ValidationError
 from trytond.config import config
 
 
@@ -315,7 +316,7 @@ class PrinterRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             else:
                 ipaddress.ip_address(self.ip_address)
         except ValueError:
-            raise UserError(gettext('printer.invalid_ip_address',
+            raise ValidationError(gettext('printer.invalid_ip_address',
                     ip=self.ip_address,
                     rule=self.rec_name))
 
