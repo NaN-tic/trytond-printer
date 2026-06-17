@@ -117,6 +117,7 @@ class Printer(ModelSQL, ModelView):
     @staticmethod
     def cups_connection():
         cups.setServer(CUPS_SERVER)
+        cups.setEncryption(cups.HTTP_ENCRYPT_REQUIRED)
         return cups.Connection()
 
     @classmethod
