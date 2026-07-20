@@ -8,7 +8,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from werkzeug.wrappers import Response
 
-from trytond.config import config
+import trytond.config as config
 from trytond.wsgi import app
 from trytond.protocols.wrappers import with_pool, with_transaction
 
