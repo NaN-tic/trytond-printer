@@ -13,9 +13,7 @@ from trytond.transaction import Transaction
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
 from trytond.model.exceptions import ValidationError
-from trytond.config import config
-
-
+import trytond.config as config
 CUPS_SERVER = config.get('printer', 'server', default='localhost')
 
 PRINTER_STATES = [
