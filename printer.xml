@@ -33,14 +33,6 @@
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
-        <record model="ir.model.access" id="access_printer_admin">
-            <field name="model">printer</field>
-            <field name="group" ref="res.group_admin"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_delete" eval="True"/>
-        </record>
 
 
         <record model="ir.model.button" id="printer_update_info_button">
@@ -48,18 +40,10 @@
             <field name="string">Update State &amp; Info</field>
             <field name="model">printer</field>
         </record>
-        <record model="ir.model.button-res.group" id="printer_update_info_button_group_admin">
-            <field name="button" ref="printer_update_info_button"/>
-            <field name="group" ref="res.group_admin"/>
-        </record>
         <record model="ir.model.button" id="printer_test_button">
             <field name="name">test</field>
             <field name="string">Print Test Page</field>
             <field name="model">printer</field>
-        </record>
-        <record model="ir.model.button-res.group" id="printer_test_button_group_admin">
-            <field name="button" ref="printer_test_button"/>
-            <field name="group" ref="res.group_admin"/>
         </record>
         <menuitem parent="menu_printing" sequence="10"
             action="act_printer_form" id="menu_printers"/>
@@ -96,27 +80,16 @@
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
-        <record model="ir.model.access" id="access_printer_rule_admin">
-            <field name="model">printer.rule</field>
-            <field name="group" ref="res.group_admin"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_delete" eval="True"/>
-        </record>
 
         <menuitem parent="menu_printing" sequence="20"
             action="act_printer_rule_form" id="menu_printer_rules"/>
 
         <record model="res.user" id="user_update_info">
+            <field name="administrator" eval="True"/>
             <field name="login">user_cron_update_info</field>
             <field name="name">Cron Update Printer Information</field>
             <field name="signature"></field>
             <field name="active" eval="False"/>
-        </record>
-        <record model="res.user-res.group" id="user_update_info_group_admin">
-            <field name="user" ref="user_update_info"/>
-            <field name="group" ref="res.group_admin"/>
         </record>
 
         <record model="printer.state" id="printer_state_unavailable">
