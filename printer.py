@@ -1,3 +1,5 @@
+import base64
+import logging
 import os
 import cups
 import tempfile
@@ -5,15 +7,22 @@ import ipaddress
 import subprocess
 from datetime import datetime
 from cups import IPPError
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import padding
 from trytond.model import (sequence_ordered, ModelSQL, ModelView, MatchMixin,
     fields)
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.rpc import RPC
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
 from trytond.model.exceptions import ValidationError
 import trytond.config as config
+logger = logging.getLogger(__name__)
+
+PRIVATE_KEY = config.get('printer', 'private_key')
+PRIVATE_KEY_PASS = config.get('printer', 'private_key_pass', default=None)
 CUPS_SERVER = config.get('printer', 'server', default='localhost')
 
 PRINTER_STATES = [
@@ -72,6 +81,9 @@ class Printer(ModelSQL, ModelView):
     @classmethod
     def __setup__(cls):
         super(Printer, cls).__setup__()
+        cls.__rpc__.update({
+                'sign_message': RPC(),
+                })
         cls._buttons.update({
                 'update_info': {
                     'icon': 'tryton-refresh',
@@ -80,6 +92,19 @@ class Printer(ModelSQL, ModelView):
                     'icon': 'tryton-print',
                     }
                 })
+
+    @classmethod
+    def sign_message(cls, message):
+        if not message or not PRIVATE_KEY:
+            logger.info("No private key configured or missing message")
+            return ''
+
+        password = PRIVATE_KEY_PASS.encode('utf-8') if PRIVATE_KEY_PASS else None
+        key = serialization.load_pem_private_key(
+            PRIVATE_KEY.encode('utf-8'), password)
+        signature = key.sign(
+            message.encode('utf-8'), padding.PKCS1v15(), hashes.SHA512())
+        return base64.b64encode(signature).decode('ascii')
 
     def get_rec_name(self, name):
         return '%s (%s)' % (self.name, self.state)
